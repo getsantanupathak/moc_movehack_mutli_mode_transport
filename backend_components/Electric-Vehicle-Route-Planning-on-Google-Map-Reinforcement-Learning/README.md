@@ -43,26 +43,26 @@ Our learning agent is an electric vehicle and navigating on the Google map envir
 
 Given a tuple from the replay buffer, the loss is computed by subtracting the q value which is calculated by inputing the current state into the Q-network and pick the value corresponding to the action from y. We then add up all the loss (we have 32 losses in our case) and use it to update the Q-network's weights.  
 <p align="center">
-  <img src="/image/al.JPG" height="40%" width="40%">
+  <img src="./image/al.JPG" height="40%" width="40%">
 </p>
 By Google Deepmind (link:https://deepmind.com/research/publications/deep-reinforcement-learning-double-q-learning/)<br />
 
 ### (2) Learning Environment<br />
 We make the map like a grid map for the learning agent to navigate on which is shown in figure(a). Strictly speaking, each grid in the grid map is not a rectangle. This phenomenon is caused by the sphere geometry and our restriction on the length of the stride which is demonstrated in figure (b). The reason for restricting the length of stride to certain meter is to bound the inaccuracy within the given length.<br />
-<p align="center"><img src="/image/GridMap-1.JPG" height="60%" width="60%"></p>
+<p align="center"><img src="./image/GridMap-1.JPG" height="60%" width="60%"></p>
 
 ### (3) Interact with Google map API <br />
 assume that the agent is at current position denoted by A and heading south to the next position denoted by B. Apparently, the route provided by the Directions API is the highway 395 and the distance is longer than 1000m. We can get the navigating instruction list with the form: { geocode of A, duration from A to 1, distance from A to 1, geocode of 1 }, {geocode of 1, duration from 1 to 2, distance from 1 to 2, geocode of 2 }.... where A, 1, 2 ,3 , B are shown in figure 6 after we input the geocode of A and the geocode of B into the Directions API. The number of instruction is based on the Directions API and there are four instructions in our case of following figure from A to B. We use each of the geocode in the navigating instruction list to get the height of each position from the Elevation API and compute the elevation within each instruction.
-<p align="center"><img src="/image/map1-1.JPG" height="60%" width="60%"></p><br />
+<p align="center"><img src="./image/map1-1.JPG" height="60%" width="60%"></p><br />
 
 
 ### (4) Energy Computation<br /><br />
 We compute the energy by the following flow chart which the symbol is corresponding to the previous figure.<br />
-<p align="center"><img src="/image/interact.JPG" height="100%" width="100%"></p><br />
+<p align="center"><img src="./image/interact.JPG" height="100%" width="100%"></p><br />
 The following graph shows how to compute the energy for a vehicle to travel uphill (can also be applied on a flat road)<br />
-<p align="center"><img src="/image/car2.JPG" height="50%" width="50%"></p><br />
+<p align="center"><img src="./image/car2.JPG" height="50%" width="50%"></p><br />
 But noticed that we only compute the elevation between the two position shown in the following graph. To increase the accuracy, you should minimize the distance between these two position (this will increase the computation time).<br />
-<p align="center"><img src="/image/car1.JPG" height="50%" width="50%"></p><br />
+<p align="center"><img src="./image/car1.JPG" height="50%" width="50%"></p><br />
 
 ### (5) Battery<br />
 In the experiment, the battery performance will not affect the training process. The battery is able to carry totally 50000Wh of energy which is a standard offering by electrical vehicle manufacture, Tesla. In electrochemistry, it is recommended to use the the state of charge (SOC) from 90% ~ 20% of a battery to improve it's life which we implement in our case. The SOC is calculated by the ratio between the current energy and the total energy. We will not take the battery degradation into the experiment. Further work can take the real factor on battery performance into account as part of the training process. For this experiment, we only demonstrate how much energy consumed and how many times the battery need to be charged in an ideal condition. <br />
@@ -75,17 +75,17 @@ The fundamental concept of defining the reward is based on the energy consumptio
 * **Grean:** Reachable position to reachable position where is not within the range of one stride of the destination<br />  
 * **White:** Reachable position to the position where is in the one stride length of range from the destination<br />   
 
-<p align="center"><img src="/image/Reward.png" height="45%" width="45%"></p><br />
+<p align="center"><img src="./image/Reward.png" height="45%" width="45%"></p><br />
 
 
 ## Result
 The agent is being trained from the start position (geocode:40.4682572, -86.9803475) and the destination (geocode:40.445283, -86.948429) with stride length 750m. Steps more than 64 steps within an episode will be regarded as failed. Noticed that during the training, Google map api often blocked our server and we are forced to end the training process and resume the model from the interrupted episode (red line). This problem will lead to the empty replay buffer where we choose sample uniformly at random to compute the loss and updtate the weights during learning. As a result, we will need to resume the model and start choosing action randomly to refill the replay buffer and gradually decrease the portion of random action. <br />
 
 The blue line in figure 9 shows the energy consumed by the agent. The agent is able to find out a way to minimize the energy consumption after 600 episodes. The oscillation in the first 600 episodes is caused by highly random action (green line) and inaccurate Q value provided by the Q-network. While the loss of inaccurate Q value is minimized, the oscillation is mitigated and the energy consumption become less and stable. The minimum energy that the agent can achieve with random action is 1327(J) and the corresponding time is 659 seconds where the energy and time of the route provided by Google map are 1489(J) and 315 seconds.<br />
-<p align="center"><img src="/image/result750-1.JPG" height="110%" width="110%"></p><br />
+<p align="center"><img src="./image/result750-1.JPG" height="110%" width="110%"></p><br />
 
 The lower figure is the result of energy consumption with stride length of 1000m. Steps more than 36 steps within an episode will be regarded as failed. The minimum energy that the agent can achieve with random action is 1951(J) and the corresponding time is 946 seconds. We didn't make this experiment end at the same point as the previous one because we just want to demonstrate the trend that with lower stride length we can achieve better result but more computation time.<br />
-<p align="center"><img src="/image/result1000.JPG" height="110%" width="110%"></p><br />
+<p align="center"><img src="./image/result1000.JPG" height="110%" width="110%"></p><br />
 
 ## Credit
 I learn a lot from Arthur Juliani's tutorial website which implement reinforcement learning algorithm with tensorflow. I also reference part of his code and modified it. (link: https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0)<br />
