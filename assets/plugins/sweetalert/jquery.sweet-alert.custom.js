@@ -21,6 +21,11 @@
     $('#sa-success').click(function(){
         swal("Good job!", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem erat eleifend ex semper, lobortis purus sed.", "success")
     });
+    
+    //Panic Message
+    $('#sa-panic').click(function(){
+        swal("SMS Sent!", "Your nearest/dearest ones are notified now. Hold on tight, you will get through this.", "success")
+    });
 
     //Warning Message
     $('#sa-warning').click(function(){
@@ -64,6 +69,23 @@
             title: "Govinda!",   
             text: "Recently joined twitter",   
             imageUrl: "../assets/images/users/1.jpg" 
+        });
+    });
+    //Custom Image
+    $('#sa-pay').click(function(){
+        swal({   
+            title: "Tickets Booked",   
+            text: "Pay through PayTM!",   
+            imageUrl: "./assets/images/qr_code_large.png" 
+        });
+    });
+    
+    //Custom Image
+    $('#sa-fare').click(function(){
+        swal({   
+            title: "Tickets Booked",   
+            text: "Pay through PayTM!",   
+            imageUrl: "./assets/images/qr_code_large.png" 
         });
     });
 

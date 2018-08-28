@@ -808,6 +808,7 @@
                             </div>
                             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                                 <button type="button" id="fare" class="btn waves-effect waves-light btn-outline-danger" style="display:none"><i class="icon-wallet"></i> Total Fare = Rs.</button>
+                                <img src="./assets/images/alert/alert5.png" alt="alert" class="img-responsive model_img" id="sa-fare" style="display:none">
                             </div>
                             <div class="d-flex m-r-20 m-l-10 hidden-md-down">
 								<button class="changing_city btn btn-info" style="display:none"></button>
@@ -941,6 +942,12 @@
     <script>
     	document.getElementById("panic").addEventListener("click", function(){
 			document.getElementById("sa-panic").click();
+		});
+		document.getElementById("fare").addEventListener("hover", function(){
+			document.getElementById("fare").innerHTML = "Book & Pay";
+		});
+		document.getElementById("fare").addEventListener("click", function(){
+			document.getElementById("sa-fare").click();
 		});
 		function onSignIn(googleUser) {
 		  var profile = googleUser.getBasicProfile();
