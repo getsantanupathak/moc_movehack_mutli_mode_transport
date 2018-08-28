@@ -17,7 +17,7 @@ The platform uses Machine Learning & Artificial Intelligence on trip information
 
 
 ## Backend Components:
-- [Best-Time_To_Travel](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Best-Time_To_Travel)
-- [Electric-Vehicle-Route-Planning-on-Google-Map-Reinforcement-Learning](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Electric-Vehicle-Route-Planning-on-Google-Map-Reinforcement-Learning)
-- [Traffic-Condition-Recognition-Using-The-K-Means-Clustering-Method](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Traffic-Condition-Recognition-Using-The-K-Means-Clustering-Method)
-- [Traffic-Time-Lapse-viewer](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Traffic-Time-Lapse-viewer)
+- [Best-Time_To_Travel](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Best-Time_To_Travel) : Helps commuter understand which day or the week and what time is the best time to travel to save location like home/work as per his choce. 
+- [Electric-Vehicle-Route-Planning-on-Google-Map-Reinforcement-Learning](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Electric-Vehicle-Route-Planning-on-Google-Map-Reinforcement-Learning) : Google DeepMind's DQN implementaion aiming to take battery, motor, traffic time, and other factor into account for generating better route (minimize the energy consumption) for the vehicle under certain condition.
+- [Traffic-Condition-Recognition-Using-The-K-Means-Clustering-Method](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Traffic-Condition-Recognition-Using-The-K-Means-Clustering-Method) : Modified K-means Clustering (MKC) approach to understand Traffic flow modelling and driving condition analysis. 
+- [Traffic-Time-Lapse-viewer](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Traffic-Time-Lapse-viewer) : A script that makes creating time lapses of traffic in Google Maps easy.
