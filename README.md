@@ -10,3 +10,7 @@ The platform uses Machine Learning & Artificial Intelligence on trip information
 
 
 ![Prayan - Platform Design](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/blob/master/prayan_design.jpeg)
+
+
+### DEMO VIDEO : https://youtu.be/EuMTsCguAms
+### DEMO : https://d2lnn9wg7vaqfz.cloudfront.net/index.html 
