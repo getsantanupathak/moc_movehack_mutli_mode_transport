@@ -14,3 +14,10 @@ The platform uses Machine Learning & Artificial Intelligence on trip information
 
 ### DEMO VIDEO : https://youtu.be/EuMTsCguAms
 ### DEMO : https://d2lnn9wg7vaqfz.cloudfront.net/index.html 
+
+
+## Backend Components:
+- [Best-Time_To_Travel](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Best-Time_To_Travel)
+- [Electric-Vehicle-Route-Planning-on-Google-Map-Reinforcement-Learning](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Electric-Vehicle-Route-Planning-on-Google-Map-Reinforcement-Learning)
+- [Traffic-Condition-Recognition-Using-The-K-Means-Clustering-Method](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Traffic-Condition-Recognition-Using-The-K-Means-Clustering-Method)
+- [Traffic-Time-Lapse-viewer](https://github.com/getsantanupathak/prayan-mutli-mode-transportation/tree/master/backend_components/Traffic-Time-Lapse-viewer)
