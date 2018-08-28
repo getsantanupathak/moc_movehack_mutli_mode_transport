@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
 __doc__ = 'Google Maps tool for obtaining estimated trip times.'
-__author__ = 'Michael Smith'
-__license__ = 'MIT'
+__author__ = 'Santanu Pathak'
 
 import urllib, time, datetime, sys, os.path, json, pprint, argparse
 
-parser = argparse.ArgumentParser(description='Google Maps tool for obtaining estimated trip times.')
+parser = argparse.ArgumentParser(description='Cron job to get travel time for a specific trip at different time durations.')
 parser.add_argument("-tm", "--traffic-model", help="traffic model to use",
                     type=str, choices=['best_guess', 'pessimistic', 'optimistic', 'all'])
 parser.add_argument("-d", "--direction", help="direction of travel", 
@@ -16,10 +15,13 @@ parser.add_argument("-dt", "--departure-time", help="time of departure",
 args = parser.parse_args()
 
 #Preset Locations, separated by +s.
-home = '300+Upper+Brook+St,+Manchester'
-work = '700+Stockport+Rd,+Manchester'
+#home = 'Santhosai,+#01,+Sai Avenue,+Green+Glen Layout,+ORR,+Bellandur,+Bengaluru,,+Karnataka,+Bellandur,+Bengaluru,+Karnataka+560103'
+home = "Santhosai, 01, Sai Avenue, Green Glen Layout, ORR, Bellandur, Bengaluru, Karnataka, Bellandur, Bengaluru, Karnataka 560103"
+work = "Embassy Golf Links Business Park, Challaghatta, Bengaluru, Karnataka 560071"
+#work = 'Embassy+Golf+Links+Business+Park,+Challaghatta,+Bengaluru,+Karnataka'
+
 #CSV File to write to.
-csv_file = '/destination/path/to/csv/file.csv'
+csv_file = '/Users/sapathak/Desktop/myofficecab/others/google_traffic/trip.csv'
 
 direction = args.direction
 traffic_model = args.traffic_model
@@ -27,7 +29,7 @@ traffic_model = args.traffic_model
 class googleMaps:
     def __init__(self):
         self.url = 'https://maps.googleapis.com/maps/api/directions/json?'
-        self.key = 'API KEY GOES HERE'
+        self.key = 'AIzaSyAwV8ODh3f3d8iapXNMO-n10LJZZxs5waw'
 
     def get_time(self, origin, destination, traffic_model):
         """Return observations for a given trip.
@@ -39,8 +41,10 @@ class googleMaps:
             traffic_model - best_guess|pessimistic|optimistic - the traffic model to use for time estimation.
         """
         url = self.url+'origin='+origin+'&destination='+destination+'&key='+self.key+'&departure_time=now&traffic_model='+traffic_model
+        print url
         json_url = urllib.urlopen(url).read()
         json_dict = json.loads(json_url)
+	print json_dict
         time_estimate = json_dict['routes'][0]['legs'][0]['duration_in_traffic']['value'] /60
         current_time = time.localtime(time.time())
         if origin == home:
@@ -66,7 +70,7 @@ class googleMaps:
             list - array - the array to be appended to the CSV file.
             filename - string - the CSV file the array should be appended to.
         """
-    #    self.check_csv(filename)
+        self.check_csv(filename)
         with open(filename,'a') as f:
             f.write(self.to_csv(list))
         f.close()
